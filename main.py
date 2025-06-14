@@ -24,14 +24,12 @@ def price_all(S0, K, T, r, sigma, dt, n_paths):
     paths = generate_gbm_paths(S0, mu, sigma, T, dt, n_paths)
 
     return {
-        # CALLS
         "European_call": black_scholes_call_price(S0, K, T, r, sigma),
         "Asian_call": monte_carlo_asian_call_price(paths, K, r, T),
         "Lookback_call": monte_carlo_lookback_call_price(paths, r, T),
         "American_call": least_squares_mc_american_call(paths, K, r, T, dt),
         "Barrier_call": monte_carlo_knock_out_call_price(paths, K, r, T, barrier=130),
 
-        # PUTS
         "European_put": black_scholes_put_price(S0, K, T, r, sigma),
         "Asian_put": monte_carlo_asian_put_price(paths, K, r, T),
         "Lookback_put": monte_carlo_lookback_put_price(paths, r, T),
