@@ -1,0 +1,52 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# VS Code settings
+.vscode/
+
+# Mac-specific files
+.DS_Store
+
+# Data files
+data/*.csv
+!data/README.md   # keep a placeholder if you want to keep the folder
+
+# Logs and output
+*.log
+*.out
+
+# Python packaging
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Environment files
+*.env
+
+# Anaconda
+*.conda
+*.ipynb_checkpoints/
+
+# OS-specific
+Thumbs.db
+ehthumbs.db
+
+# PyCharm
+.idea/
+
+# RLlib / Ray
+ray_results/
