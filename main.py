@@ -47,19 +47,29 @@ def generate_dataset(n_samples_per_type=1000, dt=1/252, n_paths=1000, seed=42):
 
     option_dfs = {opt: [] for opt in option_types}
 
-
     for _ in tqdm(range(n_samples_per_type)):
         params = sample_parameters()
         prices = price_all(**params, dt=dt, n_paths=n_paths)
 
         for opt in option_types:
+            style, typ = opt.split("_")  # e.g. "Asian", "call"
+
             option_dfs[opt].append({
-                "S0": params["S0"],
-                "K": params["K"],
+                "option_style": style,
+                "option_type": typ,
+                "strike": params["K"],
+                "underlying_price": params["S0"],
+                "maturity_days": int(params["T"] * 252),
                 "T": params["T"],
                 "r": params["r"],
                 "sigma": params["sigma"],
-                "option_price": prices[opt]
+                "option_price": prices[opt],
+                "IV": params["sigma"],  # synthetic implied vol = true vol
+                "LTP": prices[opt],     # assume fair price = LTP
+                "Bid": round(0.99 * prices[opt], 4),
+                "Ask": round(1.01 * prices[opt], 4),
+                "dt": dt,
+                "n_paths": n_paths
             })
 
     for opt in option_types:
@@ -67,6 +77,7 @@ def generate_dataset(n_samples_per_type=1000, dt=1/252, n_paths=1000, seed=42):
         filename = f"data/{opt}.csv"
         df.to_csv(filename, index=False)
         print(f"✅ Saved {opt} data to {filename}")
+
 
 if __name__ == "__main__":
     generate_dataset(n_samples_per_type=1000)
