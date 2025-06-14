@@ -80,4 +80,4 @@ def generate_dataset(n_samples_per_type=1000, dt=1/252, n_paths=1000, seed=42):
 
 
 if __name__ == "__main__":
-    generate_dataset(n_samples_per_type=1000)
+    generate_dataset(n_samples_per_type=2000)
