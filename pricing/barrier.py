@@ -9,3 +9,10 @@ def monte_carlo_knock_out_call_price(paths, K, r, T, barrier):
     is_knocked_out = (paths > barrier).any(axis=1)
     payoffs = np.where(is_knocked_out, 0, np.maximum(S_T - K, 0))
     return np.exp(-r * T) * np.mean(payoffs)
+
+def monte_carlo_knock_out_put_price(paths, K, r, T, barrier):
+    S_T = paths[:, -1]
+    is_knocked_out = (paths > barrier).any(axis=1)
+    payoffs = np.where(is_knocked_out, 0, np.maximum(K - S_T, 0))
+    return np.exp(-r * T) * np.mean(payoffs)
+

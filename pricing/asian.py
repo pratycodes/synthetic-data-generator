@@ -8,3 +8,8 @@ def monte_carlo_asian_call_price(paths, K, r, T):
     average_prices = paths.mean(axis=1)
     payoffs = np.maximum(average_prices - K, 0)
     return np.exp(-r * T) * np.mean(payoffs)
+
+def monte_carlo_asian_put_price(paths, K, r, T):
+    average_prices = paths.mean(axis=1)
+    payoffs = np.maximum(K - average_prices, 0)
+    return np.exp(-r * T) * np.mean(payoffs)
