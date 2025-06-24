@@ -65,11 +65,6 @@ def generate_dataset(n_samples_per_type=1000, dt=1/252, n_paths=1000, seed=42):
                 "sigma": params["sigma"],
                 "option_price": prices[opt],
                 "IV": params["sigma"],  # synthetic implied vol = true vol
-                "LTP": prices[opt],     # assume fair price = LTP
-                "Bid": round(0.99 * prices[opt], 4),
-                "Ask": round(1.01 * prices[opt], 4),
-                "dt": dt,
-                "n_paths": n_paths
             })
 
     for opt in option_types:
